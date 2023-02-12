@@ -33,7 +33,7 @@ public class UserResource {
 
     }
 
-    @PostMapping
+    @PostMapping("/{userId}")
     public void create(@RequestBody User user) {
         userService.saveUser(user);
     }

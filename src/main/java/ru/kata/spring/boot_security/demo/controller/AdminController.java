@@ -28,9 +28,12 @@ public class AdminController {
     @GetMapping("/admin")
     public String userList(Model model, Principal principal) {
         Optional<User> user = userService.findByUserName(principal.getName());
-
+         User getUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         List<Role> allRoles = roleService.allRoles();
+        model.addAttribute("getUser", getUser);
         model.addAttribute("principal", user.get());
         model.addAttribute("allUsers", userService.allUsers());
+        model.addAttribute("allRoles", allRoles);
         return "admin";
     }
 
@@ -70,9 +73,9 @@ public class AdminController {
 
         return "user-edit";
     }
-     @PatchMapping("editUser/{id}")
-    public String update(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+     @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        userService.update(id, user);
         return "redirect:/admin";
     }
 }
