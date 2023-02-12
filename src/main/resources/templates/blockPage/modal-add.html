@@ -6,7 +6,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update or Create</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -31,14 +31,13 @@
                         <input type="text"  id="email" th:name="email">
                         <br/>
                         <br>
-                        <select class="form-select" size="2" aria-label="size 2 select example" >
-                            <option th:each="role: ${allRoles}" th:selected="${user.getAuthorities().contains(role)}"
-                                    th:value="${role.id}"
-                                    th:text="${role}"
-                                    th:name="role">
-
-                            </option>
-                        </select>
+                       <select class="form-control" id="roles" name="roles" multiple="multiple">
+                                                <option th:each="role : ${allRoles}"
+                                                        th:selected="${role.name}"
+                                                        th:value="${role.id}"
+                                                        th:text="${role.name}">Role name
+                                                </option>
+                                            </select>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
